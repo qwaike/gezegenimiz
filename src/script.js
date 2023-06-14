@@ -28,6 +28,13 @@ let points = null
 
 
 const generateGalaxy = () => {
+
+    if (geometry !== null || material !== null || points !== null){
+        // bunu geometry.dispose() ile de yapabiliyoruz
+        scene.remove(geometry,material,points)
+    }
+
+
     geometry = new THREE.BufferGeometry();
 
     const positions = new Float32Array(parameters.count*3)
