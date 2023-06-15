@@ -18,8 +18,10 @@ const scene = new THREE.Scene()
 
 // galaxy 
 const parameters = {}
-parameters.count = 1000
-parameters.size = 0.02
+parameters.count = 50000
+parameters.size = 0.01
+parameters.radius = 5
+parameters.branches = 3
 
 let geometry = null
 let material = null
@@ -40,9 +42,21 @@ const generateGalaxy = () => {
     const positions = new Float32Array(parameters.count*3)
     for (let i = 0; i < parameters.count; i++) {
         const i3 = i*3
-        positions[i3 +0 ] = (Math.random() - 0.5) * 4
-        positions[i3 +1 ] = (Math.random() - 0.5) * 4
-        positions[i3 +2 ] = (Math.random() - 0.5) * 4
+        // positions[i3 +0 ] = (Math.random() - 0.5)  * 4
+        // positions[i3 +1 ] = (Math.random() - 0.5)  * 4
+        // positions[i3 +2 ] = (Math.random() - 0.5)  * 4
+
+        const radius = Math.random()*parameters.radius
+        const branchAngle = (i % parameters.branches)/parameters.branches * Math.PI * 2 
+
+        if(i<240){console.log(i, branchAngle)}
+
+
+
+        positions[i3 +0 ] = Math.cos(branchAngle) * radius
+        positions[i3 +1 ] = 0
+        positions[i3 +2 ] = Math.sin(branchAngle) * radius
+        
         
     }
 
@@ -70,8 +84,10 @@ scene.add(points)
 }
 generateGalaxy();
 
-gui.add(parameters, 'count', 100,50000, 250).onFinishChange(generateGalaxy)
+gui.add(parameters, 'count', 100,1000000, 250).onFinishChange(generateGalaxy)
 gui.add(parameters, 'size', 0.001,0.1, 0.01).onFinishChange(generateGalaxy)
+gui.add(parameters, 'radius', 0.01,20, 0.01).onFinishChange(generateGalaxy)
+gui.add(parameters, 'branches', 2,20, 1).onFinishChange(generateGalaxy)
 
 
 
@@ -103,7 +119,7 @@ window.addEventListener('resize', () =>
  * Camera
  */
 // Base camera
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 25000)
 camera.position.x = 3
 camera.position.y = 3
 camera.position.z = 3
