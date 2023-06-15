@@ -22,6 +22,8 @@ parameters.count = 50000
 parameters.size = 0.01
 parameters.radius = 5
 parameters.branches = 3
+parameters.spin = 1
+parameters.randomness = 0.2
 
 let geometry = null
 let material = null
@@ -42,20 +44,24 @@ const generateGalaxy = () => {
     const positions = new Float32Array(parameters.count*3)
     for (let i = 0; i < parameters.count; i++) {
         const i3 = i*3
-        // positions[i3 +0 ] = (Math.random() - 0.5)  * 4
-        // positions[i3 +1 ] = (Math.random() - 0.5)  * 4
-        // positions[i3 +2 ] = (Math.random() - 0.5)  * 4
-
+        
+        
         const radius = Math.random()*parameters.radius
+        const spinAngle = radius * parameters.spin
+
         const branchAngle = (i % parameters.branches)/parameters.branches * Math.PI * 2 
+
+        const randomX = Math.random() * parameters.randomness
+        const randomY = Math.random() * parameters.randomness
+        const randomZ = Math.random() * parameters.randomness
 
         if(i<240){console.log(i, branchAngle)}
 
 
 
-        positions[i3 +0 ] = Math.cos(branchAngle) * radius
+        positions[i3 +0 ] = Math.cos(branchAngle + spinAngle) * radius
         positions[i3 +1 ] = 0
-        positions[i3 +2 ] = Math.sin(branchAngle) * radius
+        positions[i3 +2 ] = Math.sin(branchAngle + spinAngle) * radius
         
         
     }
@@ -88,6 +94,8 @@ gui.add(parameters, 'count', 100,1000000, 250).onFinishChange(generateGalaxy)
 gui.add(parameters, 'size', 0.001,0.1, 0.01).onFinishChange(generateGalaxy)
 gui.add(parameters, 'radius', 0.01,20, 0.01).onFinishChange(generateGalaxy)
 gui.add(parameters, 'branches', 2,20, 1).onFinishChange(generateGalaxy)
+gui.add(parameters, 'spin', -5 , 5 , 0.001).onFinishChange(generateGalaxy)
+gui.add(parameters, 'randomness', 0 , 2 , 0.001).onFinishChange(generateGalaxy)
 
 
 
