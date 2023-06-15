@@ -25,6 +25,8 @@ parameters.branches = 3
 parameters.spin = 1
 parameters.randomness = 0.2
 parameters.randomnessPower = 2
+parameters.insideColor = '#ff6030'
+parameters.outsideColor = '#ff3060'
 
 let geometry = null
 let material = null
@@ -56,7 +58,7 @@ const generateGalaxy = () => {
         const randomY = Math.pow(Math.random() , parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1)
         const randomZ = Math.pow(Math.random() , parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1)
 
-        if(i<240){console.log(i, branchAngle)}
+        // if(i<240){console.log(i, branchAngle)}
 
 
 
@@ -81,9 +83,10 @@ material = new THREE.PointsMaterial({
     sizeAttenuation: true,
     depthWrite: false,
     blending: THREE.AdditiveBlending,
-    color: 'darkblue'
+    vertexColors:true
+    
+    
 })
-
 
 points = new THREE.Points(geometry,material)
 scene.add(points)
@@ -99,8 +102,12 @@ gui.add(parameters, 'branches', 2,20, 1).onFinishChange(generateGalaxy).name('da
 gui.add(parameters, 'spin', -5 , 5 , 0.001).onFinishChange(generateGalaxy).name('dönüş')
 gui.add(parameters, 'randomness', 0 , 2 , 0.001).onFinishChange(generateGalaxy).name('rastgelelik')
 gui.add(parameters, 'randomnessPower', 1 , 10 , 0.01).onFinishChange(generateGalaxy).name('rastgelelik-düzenleyici')
+gui.addColor(parameters, 'insideColor').onFinishChange(generateGalaxy)
+gui.addColor(parameters, 'outsideColor').onFinishChange(generateGalaxy)
 
-
+parameters.material = material;
+// gui.add(parameters, 'material', 0.1 , 1 , 0.01 ).onFinishChange(generateGalaxy).name('görünürlük')
+console.log(parameters.material)
 
 
 /**
