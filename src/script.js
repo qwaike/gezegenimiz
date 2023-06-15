@@ -83,7 +83,7 @@ material = new THREE.PointsMaterial({
     sizeAttenuation: true,
     depthWrite: false,
     blending: THREE.AdditiveBlending,
-    vertexColors:true
+    // vertexColors:true
     
     
 })
