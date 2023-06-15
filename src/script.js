@@ -7,7 +7,7 @@ import * as dat from 'dat.gui'
  * Base
  */
 // Debug
-const gui = new dat.GUI()
+const gui = new dat.GUI({width:400})
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -52,9 +52,9 @@ const generateGalaxy = () => {
 
         const branchAngle = (i % parameters.branches)/parameters.branches * Math.PI * 2 
 
-        const randomX = (Math.random()-.5) * parameters.randomness
-        const randomY = (Math.random()-.5) * parameters.randomness
-        const randomZ = (Math.random()-.5) * parameters.randomness
+        const randomX = Math.pow(Math.random() , parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1)
+        const randomY = Math.pow(Math.random() , parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1)
+        const randomZ = Math.pow(Math.random() , parameters.randomnessPower) * (Math.random() < 0.5 ? 1 : -1)
 
         if(i<240){console.log(i, branchAngle)}
 
@@ -91,13 +91,13 @@ scene.add(points)
 }
 generateGalaxy();
 
-gui.add(parameters, 'count', 100,1000000, 250).onFinishChange(generateGalaxy)
-gui.add(parameters, 'size', 0.001,0.1, 0.01).onFinishChange(generateGalaxy)
-gui.add(parameters, 'radius', 0.01,20, 0.01).onFinishChange(generateGalaxy)
-gui.add(parameters, 'branches', 2,20, 1).onFinishChange(generateGalaxy)
-gui.add(parameters, 'spin', -5 , 5 , 0.001).onFinishChange(generateGalaxy)
-gui.add(parameters, 'randomness', 0 , 2 , 0.001).onFinishChange(generateGalaxy)
-gui.add(parameters, 'randomnessPower', 1 , 10 , 0.01).onFinishChange(generateGalaxy)
+gui.add(parameters, 'count', 100,1000000, 250).onFinishChange(generateGalaxy).name('adet')
+gui.add(parameters, 'size', 0.001,0.1, 0.01).onFinishChange(generateGalaxy).name('boyut')
+gui.add(parameters, 'radius', 0.01,20, 0.01).onFinishChange(generateGalaxy).name('çap')
+gui.add(parameters, 'branches', 2,20, 1).onFinishChange(generateGalaxy).name('dal')
+gui.add(parameters, 'spin', -5 , 5 , 0.001).onFinishChange(generateGalaxy).name('dönüş')
+gui.add(parameters, 'randomness', 0 , 2 , 0.001).onFinishChange(generateGalaxy).name('rastgelelik')
+gui.add(parameters, 'randomnessPower', 1 , 10 , 0.01).onFinishChange(generateGalaxy).name('rastgelelik-düzenleyici')
 
 
 
