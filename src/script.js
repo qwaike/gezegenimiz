@@ -103,8 +103,8 @@ gui.add(parameters, 'branches', 2,20, 1).onFinishChange(generateGalaxy).name('da
 gui.add(parameters, 'spin', -5 , 5 , 0.001).onFinishChange(generateGalaxy).name('dönüş')
 gui.add(parameters, 'randomness', 0 , 2 , 0.001).onFinishChange(generateGalaxy).name('rastgelelik')
 gui.add(parameters, 'randomnessPower', 1 , 10 , 0.01).onFinishChange(generateGalaxy).name('rastgelelik-düzenleyici')
-gui.addColor(parameters, 'insideColor').onFinishChange(generateGalaxy)
-gui.addColor(parameters, 'outsideColor').onFinishChange(generateGalaxy)
+gui.addColor(parameters, 'insideColor').onFinishChange(generateGalaxy).name('iç renk')
+gui.addColor(parameters, 'outsideColor').onFinishChange(generateGalaxy).name('dış renk')
 
 parameters.material = material;
 // gui.add(parameters, 'material', 0.1 , 1 , 0.01 ).onFinishChange(generateGalaxy).name('görünürlük')
