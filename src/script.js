@@ -26,7 +26,7 @@ parameters.spin = 1
 parameters.randomness = 0.2
 parameters.randomnessPower = 2
 parameters.insideColor = '#ff6030'
-parameters.outsideColor = '#ff3060'
+parameters.outsideColor = '#ff3060' 
 
 let geometry = null
 let material = null
@@ -69,6 +69,7 @@ const generateGalaxy = () => {
         
     }
 
+    const test = 0;
     geometry.setAttribute(
         'position',
         new THREE.BufferAttribute(positions,3)
